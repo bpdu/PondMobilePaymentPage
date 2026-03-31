@@ -13,7 +13,9 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from email_validator import validate_email as EmailValidator, EmailNotValidError
 
-load_dotenv()
+# Load environment variables from both .env and config/config.txt
+load_dotenv(dotenv_path=".env")
+load_dotenv(dotenv_path="config/config.txt")
 
 # Environment variables (must be defined before Flask app)
 AUTHORIZE_API_URL = "https://api.authorize.net/xml/v1/request.api"

@@ -62,11 +62,11 @@ nano deploy/.env.example
 **Required settings:**
 
 ```bash
-# Authorize.net credentials
+# deploy/.env.example - Authorize.net credentials
 AUTHORIZE_API_LOGIN_ID=your-actual-api-login-id
 AUTHORIZE_TRANSACTION_KEY=your-actual-transaction-key
 
-# Production URL with localhost access for testing
+# config/config.txt - Application URLs
 APP_BASE_URL=https://www.pondmobile.com
 ALLOWED_ORIGINS=https://www.pondmobile.com,https://pondmobile.com,http://localhost:5001,http://127.0.0.1:5001
 ```
@@ -93,7 +93,8 @@ ALLOWED_ORIGINS=https://www.pondmobile.com,https://pondmobile.com,http://localho
 
 - Docker installed on server
 - Git access to repository
-- `deploy/.env.example` configured with actual credentials
+- `deploy/.env.example` configured with Authorize.net credentials
+- `config/config.txt` contains application URLs (defaults are production-ready)
 
 ### Manual Docker Commands
 
