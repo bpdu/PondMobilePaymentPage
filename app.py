@@ -41,6 +41,7 @@ AUTHORIZE_HOSTED_FORM_URL = "https://accept.authorize.net/payment/payment"
 API_LOGIN_ID = os.getenv("AUTHORIZE_API_LOGIN_ID", "").strip()
 TRANSACTION_KEY = os.getenv("AUTHORIZE_TRANSACTION_KEY", "").strip()
 APP_BASE_URL = os.getenv("APP_BASE_URL", "http://127.0.0.1:5001").rstrip("/")
+BUILD_VERSION = os.getenv("BUILD_VERSION", "dev")
 
 # CORS configuration
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "").split(",")
@@ -191,7 +192,7 @@ def health_check():
     """Health check endpoint for monitoring and Docker."""
     if not API_LOGIN_ID or not TRANSACTION_KEY:
         return jsonify({"status": "down"}), 503
-    return jsonify({"status": "healthy"}), 200
+    return jsonify({"status": f"healthy [{BUILD_VERSION}]"}), 200
 
 
 @app.route("/", methods=["GET"])

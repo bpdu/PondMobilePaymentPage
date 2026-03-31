@@ -10,6 +10,10 @@ RUN pip install --no-cache-dir --user -r requirements.txt
 # Runtime stage
 FROM python:3.12-slim
 
+# Build arguments for versioning
+ARG BUILD_VERSION=dev
+ENV BUILD_VERSION=${BUILD_VERSION}
+
 # Create non-root user for security
 RUN groupadd -r nonroot && useradd -r -g nonroot nonroot
 
