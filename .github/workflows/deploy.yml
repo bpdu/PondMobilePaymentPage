@@ -219,6 +219,9 @@ jobs:
               --restart unless-stopped \
               -p 5001:5001 \
               -v pondmobile-logs:/app/logs \
+              --cpus="0.5" \
+              --memory="512m" \
+              --pids-limit 100 \
               -e AUTHORIZE_API_LOGIN_ID="${{ secrets.POND_PAYMENT_AUTHORIZE_API_LOGIN_ID }}" \
               -e AUTHORIZE_TRANSACTION_KEY="${{ secrets.POND_PAYMENT_AUTHORIZE_TRANSACTION_KEY }}" \
               $IMAGE_NAME:$VERSION 2>&1 || {

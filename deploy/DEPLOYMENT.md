@@ -105,6 +105,9 @@ docker run -d \
   --restart unless-stopped \
   -p 5001:5001 \
   -v pondmobile-logs:/app/logs \
+  --cpus="0.5" \
+  --memory="512m" \
+  --pids-limit 100 \
   -e AUTHORIZE_API_LOGIN_ID=your-api-login-id \
   -e AUTHORIZE_TRANSACTION_KEY=your-transaction-key \
   pondmobile-payment:latest
@@ -163,6 +166,9 @@ docker run -d \
   --restart unless-stopped \
   -p 5001:5001 \
   -v pondmobile-logs:/app/logs \
+  --cpus="0.5" \
+  --memory="512m" \
+  --pids-limit 100 \
   -e AUTHORIZE_API_LOGIN_ID=your-api-login-id \
   -e AUTHORIZE_TRANSACTION_KEY=your-transaction-key \
   pondmobile-payment:abc1234
