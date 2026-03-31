@@ -69,12 +69,13 @@ AUTHORIZE_TRANSACTION_KEY=your-actual-transaction-key
 # Production URL with localhost access for testing
 APP_BASE_URL=https://www.pondmobile.com
 ALLOWED_ORIGINS=https://www.pondmobile.com,https://pondmobile.com,http://localhost:5001,http://127.0.0.1:5001
-
-FLASK_ENV=production
-DOCKER_ENV=true
 ```
 
 **Note:** ALLOWED_ORIGINS includes localhost for testing. You can test the deployed API from your local machine.
+
+**Production features (always enabled):**
+- Dual logging: files (logs/*.log) + stdout (docker logs)
+- Security headers: HSTS, CSP, X-Frame-Options, etc.
 
 ### Manual Deployment Trigger
 

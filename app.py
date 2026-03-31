@@ -89,14 +89,13 @@ def setup_logging():
     security_logger.addHandler(security_handler)
     security_logger.setLevel(logging.INFO)
 
-    # Console logging for Docker
-    if os.getenv("DOCKER_ENV"):
-        import sys
-        logging.basicConfig(
-            stream=sys.stdout,
-            level=logging.INFO,
-            format='%(asctime)s [%(levelname)s] %(message)s'
-        )
+    # Console logging for Docker (always enabled for production)
+    import sys
+    logging.basicConfig(
+        stream=sys.stdout,
+        level=logging.INFO,
+        format='%(asctime)s [%(levelname)s] %(message)s'
+    )
 
     return access_logger, security_logger
 
@@ -178,13 +177,12 @@ def log_response(response):
 
 @app.after_request
 def set_security_headers(response):
-    """Set security headers for production."""
-    if os.getenv("FLASK_ENV") == "production" or os.getenv("DOCKER_ENV"):
-        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
-        response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["X-Frame-Options"] = "DENY"
-        response.headers["X-XSS-Protection"] = "1; mode=block"
-        response.headers["Content-Security-Policy"] = "default-src 'self'"
+    """Set security headers for production (always enabled)."""
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Content-Security-Policy"] = "default-src 'self'"
     return response
 
 
