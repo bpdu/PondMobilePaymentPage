@@ -13,7 +13,10 @@ jobs:
     steps:
       - name: Get short SHA
         id: sha
-        run: echo "short_sha=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+        run: |
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          echo "Short SHA: $SHORT_SHA"
+          echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
 
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.0
