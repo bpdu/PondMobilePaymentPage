@@ -15,7 +15,7 @@ ARG BUILD_VERSION=dev
 ENV BUILD_VERSION=${BUILD_VERSION}
 
 # Create non-root user for security
-RUN groupadd -r nonroot && useradd -r -g nonroot nonroot
+RUN groupadd -r nonroot && useradd -r -g nonroot -m nonroot
 
 # Set working directory
 WORKDIR /app
@@ -43,4 +43,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:5001/health')" || exit 1
 
 # Run with Gunicorn (production WSGI server)
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5001", "--access-logfile", "-", "--error-logfile", "-", "app:app"]
+# --timeout 60: Increased from default 30s due to resource limits (0.5 CPU, 512MB RAM)
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5001", "--timeout", "60", "--access-logfile", "-", "--error-logfile", "-", "app:app"]
