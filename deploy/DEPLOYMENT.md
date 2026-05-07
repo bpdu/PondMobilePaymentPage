@@ -57,6 +57,7 @@ cat ~/.ssh/github_deploy
 ```bash
 # config/config.txt - Application URLs
 APP_BASE_URL=https://www.pondmobile.com
+CANCEL_RETURN_URL=http://www.pondmobile.com/pond-mobile-secure-gateway
 ALLOWED_ORIGINS=https://www.pondmobile.com,https://pondmobile.com,http://localhost:5001,http://127.0.0.1:5001
 ```
 

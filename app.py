@@ -24,6 +24,10 @@ AUTHORIZE_HOSTED_FORM_URL = "https://accept.authorize.net/payment/payment"
 API_LOGIN_ID = os.getenv("AUTHORIZE_API_LOGIN_ID", "").strip()
 TRANSACTION_KEY = os.getenv("AUTHORIZE_TRANSACTION_KEY", "").strip()
 APP_BASE_URL = os.getenv("APP_BASE_URL", "http://127.0.0.1:5001").rstrip("/")
+CANCEL_RETURN_URL = os.getenv(
+    "CANCEL_RETURN_URL",
+    "http://www.pondmobile.com/pond-mobile-secure-gateway"
+).strip()
 BUILD_VERSION = os.getenv("BUILD_VERSION", "dev")
 
 # CORS configuration
@@ -276,7 +280,7 @@ def create_payment():
                         "showReceipt": True,
                         "url": "https://www.pondmobile.com/",
                         "urlText": "Continue",
-                        "cancelUrl": f"{APP_BASE_URL}/",
+                        "cancelUrl": CANCEL_RETURN_URL,
                         "cancelUrlText": "Cancel"
                     }),
                     json_setting("hostedPaymentOrderOptions", {
