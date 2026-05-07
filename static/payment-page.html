@@ -102,7 +102,7 @@ margin-top:10px;
 
 <form id="paymentForm">
 <input type="text" name="reference" placeholder="Invoice number or mobile number" required>
-<input type="number" name="amount" placeholder="Amount" required>
+<input type="text" name="amount" placeholder="Amount" inputmode="decimal" required>
 <input type="email" name="email" placeholder="Email address" required>
 
 <button id="continueBtn">CONTINUE</button>
@@ -126,9 +126,23 @@ e.preventDefault();
 btn.disabled=true;
 errorBox.textContent="";
 
+const amountRaw=form.amount.value.trim();
+const amountNormalized=amountRaw.replace(",", ".");
+if(!/^\d+(\.\d{1,2})?$/.test(amountNormalized)){
+errorBox.textContent="Enter amount in format 10,50 or 10.50";
+btn.disabled=false;
+return;
+}
+const amountValue=Number(amountNormalized);
+if(!Number.isFinite(amountValue)||amountValue<0.01){
+errorBox.textContent="Amount must be at least 0.01";
+btn.disabled=false;
+return;
+}
+
 const data={
 reference:form.reference.value,
-amount:form.amount.value,
+amount:amountNormalized,
 email:form.email.value
 };
 
